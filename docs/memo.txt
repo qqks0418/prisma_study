@@ -1,0 +1,23 @@
+https://zenn.dev/takuyanagai0213/articles/4cd72bc30c594d
+https://qiita.com/koffee0522/items/67deb39877c541bab440
+
+// スキーマ生成・変更・削除
+npx prisma migrate dev
+npx prisma migrate dev --name init
+
+==========================================================
+# Prisma Studioの起動
+$ prisma studio
+
+# データベースをリセットしDBへ反映(本番では使用しない)
+$ prisma migrate reset
+
+# マイグレーションのステータスチェック
+$ prisma migrate status
+
+# マイグレーションの実行・DBへ反映
+$ prisma migrate deploy
+
+# 型情報の生成
+$ prisma generate
+==========================================================
