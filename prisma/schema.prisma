@@ -11,10 +11,13 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  ecc3 String?  @db.VarChar(32)
-  name  String?
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  user_name      String    @db.VarChar(40)
+  user_job       String    @db.VarChar(40)
+  todo_id        String    @db.VarChar(40)
+  created_at     DateTime  @default(now()) @db.DateTime(0)
+  updated_at     DateTime  @default(dbgenerated("CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()")) @db.DateTime(0)
   posts Post[]
   task  Task?
 }
@@ -36,6 +39,24 @@ model Task {
   taska     User    @relation(fields: [userId], references: [id])
   userId    Int     @unique
 }
+
+model Todo {
+  id             Int       @id @default(autoincrement())
+  todo_name      String    @db.VarChar(40)
+  todo_status    Int
+  created_at     DateTime  @default(now()) @db.DateTime(0)
+  updated_at     DateTime  @default(dbgenerated("CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()")) @db.DateTime(0)
+}
+
+model Stage {
+  id             String    @id @db.VarChar(40)
+  tenant_id      String    @db.VarChar(40)
+  Stage_name     String    @db.VarChar(40)
+  created_at     DateTime  @default(now()) @db.DateTime(0)
+  updated_at     DateTime  @default(dbgenerated("CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP()")) @db.DateTime(0)
+
+  @@map("stage")
+} 
 
 model Env {
   id             String    @id @db.VarChar(40)
